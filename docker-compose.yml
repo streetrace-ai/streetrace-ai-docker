@@ -1,5 +1,6 @@
 services:
   streetrace-agent:
+    container_name: streetrace-agent
     build:
       context: .
       dockerfile: Dockerfile
