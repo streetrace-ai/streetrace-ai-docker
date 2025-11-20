@@ -1,12 +1,12 @@
 services:
   streetrace-agent:
+    container_name: streetrace
+    image: streetrace/streetrace:latest
     build:
       context: .
       dockerfile: Dockerfile
-      platforms:
-        - linux/amd64
     env_file:
       - .env
     volumes:
-      - .:/app
+      - .:/streetrace
 

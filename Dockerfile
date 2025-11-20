@@ -1,18 +1,18 @@
 FROM python:3.13-slim-bookworm
 
-WORKDIR /app
+WORKDIR /streetrace
 
-ARG NODE_VERSION=20
+ARG NODE_VERSION=24
 
-# install curl, GIT and ca-certificates
-RUN apt update && apt install -y curl ca-certificates git
+# install curl, GIT and ca-certificates (clean up apt cache)
+RUN apt update && apt install -y --no-install-recommends curl ca-certificates git \
+ && rm -rf /var/lib/apt/lists/*
 
 # install nvm
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 
 # set env
 ENV NVM_DIR=/root/.nvm
-ENV OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf"
 
 # install Node
 RUN bash -c "source $NVM_DIR/nvm.sh && nvm install $NODE_VERSION"
