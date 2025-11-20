@@ -4,12 +4,12 @@ Docker container for running Streetrace AI agents with pre-configured Python and
 
 ## Quick Start
 
-### Using Docker Compose (Recommended)
+### Using Docker Compose
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/streetrace-ai/streetrace-docker.git
-cd streetrace-docker
+git clone https://github.com/streetrace-ai/streetrace-ai-docker.git
+cd streetrace-ai-docker
 ```
 
 2. Copy the environment file:
@@ -22,7 +22,6 @@ cp .env.example .env
 STREETRACE_API_KEY="your_api_key_here"
 AGENT="your_agent_id_here"
 PROMPT="your_user_prompt_here"
-DEBUG=1
 ```
 
 4. Run the container:
@@ -32,14 +31,9 @@ docker-compose up
 
 ### Using Docker CLI
 
-1. Pull the pre-built image:
+Run the container:
 ```bash
-docker pull streetrace/streetrace:latest
-```
-
-2. Run the container:
-```bash
-docker run --env-file .env -v $(pwd):/streetrace streetrace/streetrace:latest
+docker run --env-file .env streetrace/streetrace:latest
 ```
 
 ### Building Locally
@@ -62,35 +56,10 @@ docker run --env-file .env -v $(pwd):/streetrace streetrace-agent
 ### Example .env Configuration
 
 ```bash
-STREETRACE_API_KEY="your_api_key_here"
-DEBUG=1
-AGENT="your_agent_id_here"
+STREETRACE_API_KEY="dnav233GFXgdfhg"
+AGENT="my_agent"
 PROMPT="Analyze this codebase and provide suggestions"
 ```
-
-## Container Features
-
-- **Python 3.13-slim** base image with uv package manager
-- **Node.js 24** installed via nvm
-- **Streetrace CLI** pre-installed from GitHub
-- **OpenTelemetry** tracing automatically configured
-- **Git** and essential build tools included
-- Volume mounting for local development at `/streetrace`
-
-## Architecture
-
-The container uses a custom entrypoint script that:
-- Configures OpenTelemetry tracing with your API key
-- Constructs the agent URL from `STREETRACE_API_URL` and `AGENT` ID
-- Enables verbose logging when `DEBUG=1`
-- Executes the Streetrace CLI with your specified prompt
-
-## CI/CD
-
-The repository includes GitHub Actions workflow that:
-- Builds multi-platform images (linux/amd64, linux/arm64)
-- Pushes to Docker Hub as `streetrace/streetrace:latest`
-- Triggers on changes to Dockerfile, entrypoint.sh, or docker-compose.yml
 
 ## Development
 
