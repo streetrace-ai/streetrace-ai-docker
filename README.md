@@ -28,8 +28,8 @@ ANTHROPIC_API_KEY="your-api-key"
 GEMINI_API_KEY="your-api-key"
 
 STREETRACE_API_KEY="your_api_key_here"
-AGENT="your_agent_id_here"
-PROMPT="your_user_prompt_here"
+STREETRACE_AGENT_ID="your_agent_id_here"
+STREETRACE_PROMPT="your_user_prompt_here"
 ```
 
 4. Run the container:
@@ -56,8 +56,8 @@ docker run --env-file .env -v $(pwd):/streetrace streetrace-agent
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `STREETRACE_API_KEY` | ✅ | - | Your Streetrace API authentication key |
-| `AGENT` | ✅ | - | The ID of the agent to run |
-| `PROMPT` | ❌ | "Hello from Streetrace!" | The prompt/message to send to the agent |
+| `STREETRACE_AGENT_ID` | ✅ | - | The ID of the agent to run |
+| `STREETRACE_PROMPT` | ❌ | - | The prompt/message to send to the agent |
 | `DEBUG` | ❌ | `false` | Enable verbose logging (`1` or `true`) |
 | `STREETRACE_API_URL` | ❌ | `https://api.streetrace.ai` | Streetrace API base URL |
 
@@ -97,12 +97,12 @@ export OPENAI_API_BASE="http://localhost:8000/v1"
 
 ```bash
 STREETRACE_API_KEY="dnav233GFXgdfhg"
-AGENT="my_agent"
-PROMPT="Analyze this codebase and provide suggestions"
+STREETRACE_AGENT_ID="my_agent"
+STREETRACE_PROMPT="Analyze this codebase and provide suggestions"
 ```
 
 > **Quoting `.env` values**  
-> The entrypoint strips a single leading and trailing quote from every variable, so both quoted and unquoted assignments behave the same (`AGENT=my-agent` and `AGENT="my-agent"` are equivalent). Keep quotes only when you need spaces in values such as `PROMPT`, and avoid mixing unmatched quotes since they will be removed.
+> The entrypoint strips a single leading and trailing quote from every variable, so both quoted and unquoted assignments behave the same (`STREETRACE_AGENT_ID=my-agent` and `STREETRACE_AGENT_ID="my-agent"` are equivalent). Keep quotes only when you need spaces in values such as `STREETRACE_PROMPT`, and avoid mixing unmatched quotes since they will be removed.
 
 ## Development
 
@@ -127,6 +127,6 @@ docker run -it --env-file .env \
 ## Troubleshooting
 
 - **Authentication errors**: Verify your `STREETRACE_API_KEY` is correct
-- **Agent not found**: Check that `AGENT` exists and is accessible
+- **Agent not found**: Check that `STREETRACE_AGENT_ID` exists and is accessible
 - **Network issues**: Ensure `STREETRACE_API_URL` is reachable
 - **Debug mode**: Set `DEBUG=1` for verbose output
